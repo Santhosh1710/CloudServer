@@ -1,0 +1,149 @@
+<%- include ("includes/header", {"title" : "Profile"}) %>
+
+<div class="container profile-card" style="margin-top: 50px; justify-content: center; display: grid; justify-items: center;">
+  <%- include ("includes/ResponseAlert", {"req": req}) %>
+
+  <h1>Profile</h1>
+  <div class="row" style="margin-top: 30px;">
+    <div class="col-md-12">
+      <table class="profile-table">
+        <tr>
+          <th>Name: </th>
+          <th><%= user.name %></th>
+          <th><button type="button" onclick="editName(this)" class="btn hover-warning" style="background-color: transparent;" data-dismiss="modal"><i class="fa-solid fa-pen"></i></button></th>
+        </tr>
+        <tr>
+          <th>Email: </th>
+          <th><%= user.email %></th>
+        </tr>
+        <tr>
+          <th>User Since: </th>
+          <th>
+            <% date = dateAndTime(user.createdAt) %>
+            <%= date %>
+          </th>
+        </tr>
+        <tr>
+          <th>Used Storage: </th>
+          <th>
+            <% fileSize = formatBytes(user.usedStorage) %>
+            <span style="justify-content: center; display: grid; "><%= fileSize %></span>
+            <div class="used-bar" id="total">
+              <div class="used" id="used">
+                <input type="hidden" value="<%= user.usedStorage %>" id="usedStorage"/></div>
+              <span class="progress-indicator" id="progress-indicator">hi</span>
+            </div>
+          </th>
+        </tr>
+      </table>
+      <table class="profile-table" style="justify-content: center; display: grid; margin-top: 25px;">
+        <tr>
+          <th style="padding: 1rem">
+            <button type="button" onclick="changePassword(this)" class="btn hover-warning" data-dismiss="modal">Change Password</button>
+          </th>
+          <th style="padding: 1rem">
+            <button class="btn hover-danger"><a href="<%= req.URL %>/Logout" type="button"  data-dismiss="modal" style="background-color: transparent; color: #ffffff;">Log Out</a></button>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<form method="POST" action="<%= req.URL %>/Rename" id="form-rename">
+  <input type="hidden" name="name" required />
+</form>
+<div class="modal fade" id="passwordModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Change Password</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">x</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/ChangePassword" method="POST" id="form-changepassword-modal">
+            <div class="form-group">
+              <label>Enter Password</label>
+              <input type="text" name="password" class="form-control" required />
+              <label>Confirm Password</label>
+              <input type="text" name="confirmpassword" class="form-control" required />
+            </div>
+            <div id="passwordError" style="color: red;"></div> 
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default hover-danger" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn hover-success" id="submitPassword">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script>
+const form = document.getElementById('form-changepassword-modal');
+const passwordInput = form.querySelector('input[name="password"]');
+const confirmPasswordInput = form.querySelector('input[name="confirmpassword"]');
+
+function displayWarning(message) {
+  alert(message); 
+}
+
+function handleSubmit(event) {
+  event.preventDefault(); 
+  const password = passwordInput.value;
+  const confirmPassword = confirmPasswordInput.value;
+  if (password !== confirmPassword) {
+    displayWarning("Passwords don't match. Please Re-enter.");
+  } else {
+    console.log(password);
+  }
+}
+
+form.addEventListener('submit', handleSubmit);
+
+  function editName(self) {
+    var newName = prompt("Enter new Name");
+    if (newName != null) {
+      document.getElementById('form-rename').name.value = newName;
+      document.getElementById('form-rename').submit();
+    }
+  }
+
+  function changePassword(self) {
+    $("#passwordModal").modal("show");
+  }
+
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const used = document.getElementById('usedStorage').value;
+    const submitPassword = document.getElementById('submitPassword');
+    const passwordInput = document.querySelector('input[name="password"]');
+    const confirmPasswordInput = document.querySelector('input[name="confirmpassword"]');
+    const passwordError = document.getElementById('passwordError');
+    const form = document.getElementById('form-changepassword-modal');
+
+    submitPassword.addEventListener('click', function() {
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
+
+      if (password !== confirmPassword) {
+        passwordError.textContent = "Passwords don't match. Please re-enter.";
+      } else {
+        form.submit();
+      }
+    });
+    var baseUrl = document.getElementById("base-url").value;
+    var progress = "";
+    progress = ((used / 1000000000) * 100).toFixed(2)+ "%";
+
+    const progressBar = document.getElementById('used');
+    const progress_indicator = document.getElementById('progress-indicator');
+    progressBar.style.width = progress;
+    progress_indicator.innerHTML = progress;       
+    });
+</script>
+
+<%- include("includes/footer") %>
