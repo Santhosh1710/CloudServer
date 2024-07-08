@@ -13,7 +13,7 @@ var bcrypt = require("bcrypt");
 var nodemailer = require("nodemailer");
 const fs = require("fs-extra");
 var URL = "sdfg";
-const PORT = 80;
+const PORT = 4000;
 async function fetchIPAddress() {
   var ipa = await getPublicIP();
   if (ipa) {
@@ -442,7 +442,7 @@ function recursiveSearchShared(files, query) {
 
 const httpsObj = require('https');
 const https = httpsObj.createServer(app);
-https.listen(443, () => {
+https.listen(3000, () => {
   console.log(`HTTPS server running on port 3000`);
   app.get("/", async (req, res) => {
     const _id = req.params._id;
