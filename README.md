@@ -1,7 +1,7 @@
 
 # CloudServer
 
-[![GitHub](https://img.shields.io/badge/GitHub-CloudServer-blue.svg)](https://github.com/your-username/CloudServer)
+[![GitHub](https://img.shields.io/badge/GitHub-CloudServer-blue.svg)](https://github.com/Santhosh1710/CloudServer)
 
 CloudServer is a Node.js and Express-based server application with MongoDB that provides robust functionalities for managing files and user authentication.
 
