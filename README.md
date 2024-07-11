@@ -59,10 +59,6 @@ To get a local copy up and running, follow these steps:
 
    Use tools like Postman to test the APIs at `http://localhost:3000`.
 
-## Contributing
-
-Contributions are welcome! Feel free to open issues and pull requests.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
