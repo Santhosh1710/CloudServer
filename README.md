@@ -1,4 +1,4 @@
-```markdown
+
 # CloudServer
 
 [![GitHub](https://img.shields.io/badge/GitHub-CloudServer-blue.svg)](https://github.com/your-username/CloudServer)
@@ -66,4 +66,3 @@ Contributions are welcome! Feel free to open issues and pull requests.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
