@@ -27,7 +27,7 @@ To get a local copy up and running, follow these steps:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/CloudServer.git
+   git clone https://github.com/Santhosh1710/CloudServer.git
    ```
 
 2. **Install dependencies**
@@ -44,10 +44,8 @@ To get a local copy up and running, follow these steps:
    ```plaintext
    PORT=3000
    MONGODB_URI=mongodb://localhost:27017/cloudserver
-   JWT_SECRET=your_jwt_secret
+   JWT_SECRET=CloudServer
    ```
-
-   Replace `your_jwt_secret` with your preferred JWT secret.
 
 4. **Run the server**
 
