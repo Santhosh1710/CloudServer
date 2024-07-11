@@ -1,4 +1,4 @@
-var express = require("express");
+const express = require("express");
 var app = express();
 var ip = require("ip");
 require("dotenv").config();
